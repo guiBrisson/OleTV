@@ -27,7 +27,7 @@ kotlin {
     
     sourceSets {
         commonMain.dependencies {
-            implementation(projects.feature.hello)
+            api(project(":feature:hello"))
         }
     }
 }

@@ -38,6 +38,8 @@ android {
 }
 
 dependencies {
+    implementation(project(":shared"))
+
     // Androidx Core
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)

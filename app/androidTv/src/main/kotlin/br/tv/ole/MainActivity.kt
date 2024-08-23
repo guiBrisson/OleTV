@@ -11,8 +11,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
+            val greet = Greeting().greet()
             MaterialTheme {
-                Text(text = "Hello from app.androidTv")
+                Text(text = greet)
             }
         }
     }
