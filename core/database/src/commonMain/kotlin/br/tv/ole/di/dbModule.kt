@@ -1,9 +1,10 @@
 package br.tv.ole.di
 
 import br.tv.ole.Database
-import br.tv.ole.service.PlaceholderService
+import br.tv.ole.service.ChannelService
 import kotlinx.coroutines.Dispatchers
 import org.koin.core.module.Module
+import org.koin.core.scope.Scope
 import org.koin.dsl.module
 
 
@@ -13,14 +14,16 @@ val dbModule = module {
     single<Database> {
         Database(
             sqlDriver = get(),
-            dispatcher = Dispatchers.Default,
+            dispatcher = Dispatchers.Default, // TODO: change to IO dispatcher
         )
     }
 
-    single<PlaceholderService> {
-        val db: Database = get()
-        db.placeholderTable
+    single<ChannelService> {
+        fromDatabase().channelService
     }
 }
 
 expect val platformDbModule: Module
+
+// Helper function that provides easy access for Database
+fun Scope.fromDatabase(): Database = get()

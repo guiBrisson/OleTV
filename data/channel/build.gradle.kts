@@ -5,7 +5,6 @@ plugins {
     alias(libs.plugins.kotlinMultiplatform)
     alias(libs.plugins.androidLibrary)
     alias(libs.plugins.kotlinCocoapods)
-    alias(libs.plugins.sqlDelight)
 }
 
 kotlin {
@@ -27,7 +26,7 @@ kotlin {
         ios.deploymentTarget = "16.0"
         podfile = project.file("../../iosApp/Podfile")
         framework {
-            baseName = "database"
+            baseName = "channel"
             isStatic = true
             @OptIn(ExperimentalKotlinGradlePluginApi::class)
             transitiveExport = true
@@ -36,26 +35,21 @@ kotlin {
 
     sourceSets {
         androidMain.dependencies {
-            implementation(libs.sqlDelight.android)
+
         }
 
         commonMain.dependencies {
-            implementation(libs.sqlDelight.coroutinesExt)
-            implementation(libs.koin.core)
-        }
-
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
+            implementation(project(":core:database"))
         }
 
         iosMain.dependencies {
-            implementation(libs.sqlDelight.native)
+
         }
     }
 }
 
 android {
-    namespace = "br.tv.ole.core"
+    namespace = "br.tv.ole.data"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
@@ -63,11 +57,5 @@ android {
     }
     defaultConfig {
         minSdk = libs.versions.android.minSdk.get().toInt()
-    }
-}
-
-sqldelight {
-    databases.create("OleTvDb") {
-        packageName.set("br.tv.ole.db")
     }
 }
