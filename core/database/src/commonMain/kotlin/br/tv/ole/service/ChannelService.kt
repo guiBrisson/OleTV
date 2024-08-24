@@ -14,6 +14,7 @@ interface ChannelService {
 }
 
 fun DatabaseScope.channelService() = object : ChannelService {
+    private val log = logger.withTag("ChannelService")
     private val query = databaseRef.channelQueries
 
     override suspend fun selectAllChannels(): List<Channel> = withContext(backgroundDispatcher) {
@@ -45,10 +46,14 @@ fun DatabaseScope.channelService() = object : ChannelService {
                     watchingTime = channel.watchingTime,
                 )
             }
+        }.also {
+            log.i { "Inserting ${channels.size} channels into database" }
         }
 
     override suspend fun deleteChannelById(id: Long) =
         databaseRef.transactionWithContext(backgroundDispatcher) {
             query.deleteChannelById(id)
+        }.also {
+            log.i { "Deleting Channel with id $id from database" }
         }
 }

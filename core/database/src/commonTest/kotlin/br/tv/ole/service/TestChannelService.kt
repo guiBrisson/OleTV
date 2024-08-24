@@ -3,6 +3,8 @@ package br.tv.ole.service
 import br.tv.ole.Database
 import br.tv.ole.mock.mockChannels
 import br.tv.ole.testDbDriver
+import co.touchlab.kermit.Logger
+import co.touchlab.kermit.StaticConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.runTest
 import kotlin.test.*
@@ -14,6 +16,7 @@ class TestChannelService {
     fun setup() = runTest {
         val database = Database(
             sqlDriver = testDbDriver(),
+            log = Logger(StaticConfig()),
             dispatcher = Dispatchers.Default,
         )
 
