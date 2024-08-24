@@ -24,26 +24,22 @@ kotlin {
         homepage = "Link to the Shared Module homepage"
         version = "1.0"
         ios.deploymentTarget = "16.0"
-        podfile = project.file("../iosApp/Podfile")
+        podfile = project.file("../../iosApp/Podfile")
         framework {
-            baseName = "shared"
-            export(project(":feature:hello"))
-            export(project(":core:database"))
+            baseName = "channel"
+            isStatic = true
             @OptIn(ExperimentalKotlinGradlePluginApi::class)
             transitiveExport = true
         }
     }
-    
+
     sourceSets {
         androidMain.dependencies {
 
         }
 
         commonMain.dependencies {
-            api(project(":feature:hello"))
-            api(project(":core:database"))
-
-            implementation(libs.koin.core)
+            implementation(project(":core:database"))
         }
 
         iosMain.dependencies {
@@ -53,7 +49,7 @@ kotlin {
 }
 
 android {
-    namespace = "br.tv.ole.shared"
+    namespace = "br.tv.ole.data"
     compileSdk = libs.versions.android.compileSdk.get().toInt()
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11

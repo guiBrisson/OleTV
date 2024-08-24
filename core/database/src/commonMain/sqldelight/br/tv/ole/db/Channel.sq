@@ -1,0 +1,61 @@
+import kotlin.Boolean;
+
+CREATE TABLE Channel (
+    id INTEGER NOT NULL PRIMARY KEY,
+    number TEXT NOT NULL,
+    name TEXT NOT NULL,
+    genre TEXT NOT NULL,
+    type TEXT NOT NULL,
+    classification TEXT NOT NULL,
+    epgHash TEXT NOT NULL,
+    hasCatchUp INTEGER AS Boolean NOT NULL DEFAULT 0,
+    hasStartOver INTEGER AS Boolean NOT NULL DEFAULT 0,
+    isFavorite INTEGER AS Boolean NOT NULL DEFAULT 0,
+    watchingTime INTEGER NOT NULL DEFAULT 0
+);
+
+selectAllChannels:
+SELECT * FROM Channel
+ORDER BY number DESC;
+
+selectChannelById:
+SELECT * FROM Channel WHERE id = ?;
+
+getLastWatchedChannels:
+SELECT * FROM Channel
+WHERE classification <> 'ADULT' AND watchingTime > 0
+ORDER BY watchingTime DESC
+LIMIT 10;
+
+insertChannel:
+INSERT INTO Channel (
+    id,
+    number,
+    name,
+    genre,
+    type,
+    classification,
+    epgHash,
+    hasCatchUp,
+    hasStartOver,
+    isFavorite,
+    watchingTime
+) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);
+
+deleteChannelById:
+DELETE FROM Channel WHERE id = ?;
+
+updateChannel:
+UPDATE Channel
+SET
+    number = ?,
+    name = ?,
+    genre = ?,
+    type = ?,
+    classification = ?,
+    epgHash = ?,
+    hasCatchUp = ?,
+    hasStartOver = ?,
+    isFavorite = ?,
+    watchingTime = ?
+WHERE id = ?;
