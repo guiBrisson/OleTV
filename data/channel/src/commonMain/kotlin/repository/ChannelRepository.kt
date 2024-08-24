@@ -19,7 +19,7 @@ fun channelRepository(
         channelService.selectAllChannels().map { it.asModel() }
 
     override suspend fun getLastWatchedChannels(): List<Channel> =
-        channelService.getLastWatchedChannels().map { it.asModel() }
+        channelService.selectLastWatchedChannels().map { it.asModel() }
 
     override suspend fun insertChannel(channel: List<Channel>) =
         channelService.insertChannels(channel.map { it.toData() })

@@ -39,6 +39,10 @@ kotlin {
             implementation(libs.sqlDelight.android)
         }
 
+        getByName("androidUnitTest").dependencies {
+            implementation(libs.sqlDelight.jvm)
+        }
+
         commonMain.dependencies {
             implementation(libs.sqlDelight.coroutinesExt)
             implementation(libs.koin.core)
@@ -46,6 +50,7 @@ kotlin {
 
         commonTest.dependencies {
             implementation(libs.kotlin.test)
+            implementation(libs.coroutines.test)
         }
 
         iosMain.dependencies {

@@ -7,7 +7,7 @@ import kotlinx.coroutines.withContext
 
 interface ChannelService {
     suspend fun selectAllChannels(): List<Channel>
-    suspend fun getLastWatchedChannels(): List<Channel>
+    suspend fun selectLastWatchedChannels(): List<Channel>
     suspend fun selectById(id: Long): Channel?
     suspend fun insertChannels(channels: List<Channel>)
     suspend fun deleteChannelById(id: Long)
@@ -20,7 +20,7 @@ fun DatabaseScope.channelService() = object : ChannelService {
         query.selectAllChannels().executeAsList()
     }
 
-    override suspend fun getLastWatchedChannels(): List<Channel> = withContext(backgroundDispatcher) {
+    override suspend fun selectLastWatchedChannels(): List<Channel> = withContext(backgroundDispatcher) {
         query.getLastWatchedChannels().executeAsList()
     }
 
