@@ -17,5 +17,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "OleTV"
 include(":app:androidTv")
-include(":feature:hello")
 include(":shared")
+include(":core:database")
+include(":feature:hello")
