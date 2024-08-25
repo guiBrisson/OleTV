@@ -27,10 +27,12 @@ kotlin {
         podfile = project.file("../iosApp/Podfile")
         framework {
             baseName = "shared"
-            export(project(":feature:hello"))
-            export(project(":core:database"))
+            linkerOpts("-lsqlite3")
             @OptIn(ExperimentalKotlinGradlePluginApi::class)
             transitiveExport = true
+
+            export(project(":feature:hello"))
+            export(project(":core:database"))
         }
     }
     
