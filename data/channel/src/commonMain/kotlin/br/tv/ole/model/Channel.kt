@@ -1,4 +1,4 @@
-package model
+package br.tv.ole.model
 
 data class Channel(
     val id: Long,

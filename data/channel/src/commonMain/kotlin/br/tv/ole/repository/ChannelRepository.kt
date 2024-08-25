@@ -1,9 +1,9 @@
-package repository
+package br.tv.ole.repository
 
 import br.tv.ole.service.ChannelService
-import mapper.asModel
-import mapper.toData
-import model.Channel
+import br.tv.ole.mapper.asModel
+import br.tv.ole.mapper.toData
+import br.tv.ole.model.Channel
 
 interface ChannelRepository {
     suspend fun getAllChannels(): List<Channel>

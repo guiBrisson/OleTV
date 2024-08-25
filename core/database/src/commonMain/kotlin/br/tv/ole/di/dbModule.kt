@@ -6,6 +6,7 @@ import co.touchlab.kermit.Logger
 import co.touchlab.kermit.StaticConfig
 import co.touchlab.kermit.platformLogWriter
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.IO
 import org.koin.core.module.Module
 import org.koin.core.parameter.parametersOf
 import org.koin.core.scope.Scope
@@ -19,7 +20,7 @@ val dbModule = module {
         Database(
             sqlDriver = get(),
             log = getWith("Database"),
-            dispatcher = Dispatchers.Default, // TODO: change to IO dispatcher
+            dispatcher = Dispatchers.IO,
         )
     }
 

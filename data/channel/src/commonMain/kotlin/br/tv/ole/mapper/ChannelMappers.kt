@@ -1,6 +1,6 @@
-package mapper
+package br.tv.ole.mapper
 
-import model.Channel
+import br.tv.ole.model.Channel
 
 fun br.tv.ole.db.Channel.asModel(): Channel {
     return Channel(
