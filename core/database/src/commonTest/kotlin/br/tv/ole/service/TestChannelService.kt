@@ -36,17 +36,6 @@ class TestChannelService {
     }
 
     @Test
-    fun `Select Item by Id Success`() = runTest {
-        val channels = service.selectAllChannels()
-        val firstChannel = channels.first()
-
-        assertNotNull(
-            actual = service.selectById(firstChannel.id),
-            message = "Could not retrieve Channel by Id"
-        )
-    }
-
-    @Test
     fun `Select Last Watched Channels Success`() = runTest {
         val expected = mockChannels
             .filter { it.classification != "ADULT" }
@@ -58,6 +47,31 @@ class TestChannelService {
             expected = expected,
             actual = service.selectLastWatchedChannels(),
             message = "Last Watched Channels does not match"
+        )
+    }
+
+    @Test
+    fun `Select Channel by Id Success`() = runTest {
+        val channels = service.selectAllChannels()
+        val firstChannel = channels.first()
+
+        assertNotNull(
+            actual = service.selectById(firstChannel.id),
+            message = "Could not retrieve Channel by Id"
+        )
+    }
+
+    @Test
+    fun `Update Channel Success`() = runTest {
+        val updatedChannel = mockChannels.first().copy(
+            name = "New Name"
+        )
+        service.updateChannel(updatedChannel)
+
+        assertEquals(
+            expected = updatedChannel,
+            actual = service.selectById(updatedChannel.id),
+            message = "Could not update Channel",
         )
     }
 
