@@ -74,6 +74,6 @@ fun DatabaseScope.channelService() = object : ChannelService {
         databaseRef.transactionWithContext(backgroundDispatcher) {
             query.deleteChannelById(id)
         }.also {
-            log.i { "Deleting Channel with id $id from database" }
+            log.i { "Deleting Channel $id from database" }
         }
 }
