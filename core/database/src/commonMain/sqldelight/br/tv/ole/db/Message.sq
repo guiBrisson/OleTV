@@ -1,0 +1,35 @@
+CREATE TABLE Message (
+    id TEXT NOT NULL PRIMARY KEY,
+    title TEXT NOT NULL,
+    content TEXT NOT NULL,
+    sent INTEGER NOT NULL,
+    read INTEGER NOT NULL
+);
+
+selectAllMessages:
+SELECT * FROM Message
+ORDER BY sent DESC;
+
+selectMessageById:
+SELECT * FROM Message WHERE id = ?;
+
+insertMessage:
+INSERT INTO Message (
+    id,
+    title,
+    content,
+    sent,
+    read
+) VALUES (?, ?, ?, ?, ?);
+
+updateMessage:
+UPDATE Message
+SET
+    title = ?,
+    content = ?,
+    sent = ?,
+    read = ?
+WHERE id = ?;
+
+deleteMessageById:
+DELETE FROM Message WHERE id = ?;

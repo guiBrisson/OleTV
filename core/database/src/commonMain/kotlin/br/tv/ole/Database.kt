@@ -20,6 +20,8 @@ class Database(
     }
 
     val channelService: ChannelService = scope.channelService()
+    val channelGenreService: ChannelGenreService = scope.channelGenreService()
+    val messageService: MessageService = scope.messageService()
 }
 
 interface DatabaseScope {

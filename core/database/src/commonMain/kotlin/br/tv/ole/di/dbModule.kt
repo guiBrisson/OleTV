@@ -1,7 +1,9 @@
 package br.tv.ole.di
 
 import br.tv.ole.Database
+import br.tv.ole.service.ChannelGenreService
 import br.tv.ole.service.ChannelService
+import br.tv.ole.service.MessageService
 import co.touchlab.kermit.Logger
 import co.touchlab.kermit.StaticConfig
 import co.touchlab.kermit.platformLogWriter
@@ -24,9 +26,9 @@ val dbModule = module {
         )
     }
 
-    single<ChannelService> {
-        fromDatabase().channelService
-    }
+    single<ChannelService> { fromDatabase().channelService }
+    single<ChannelGenreService> { fromDatabase().channelGenreService }
+    single<MessageService> { fromDatabase().messageService }
 
     // platformLogWriter() is a relatively simple config option, useful for local debugging. For production
     // uses you *may* want to have a more robust configuration from the native platform. In KaMP Kit,

@@ -23,5 +23,6 @@ include(":app:androidTv")
 include(":core:database")
 
 include(":data:channel")
+include(":data:message")
 
 include(":feature:hello")
