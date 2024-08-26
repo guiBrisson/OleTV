@@ -9,6 +9,7 @@ interface ChannelRepository {
     suspend fun getAllChannels(): List<Channel>
     suspend fun getLastWatchedChannels(): List<Channel>
     suspend fun insertChannel(channel: List<Channel>)
+    suspend fun updateChannel(channel: Channel)
     suspend fun deleteChannelById(id: Long)
 }
 
@@ -23,6 +24,9 @@ fun channelRepository(
 
     override suspend fun insertChannel(channel: List<Channel>) =
         channelService.insertChannels(channel.map { it.toData() })
+
+    override suspend fun updateChannel(channel: Channel) =
+        channelService.updateChannel(channel.toData())
 
     override suspend fun deleteChannelById(id: Long) =
         channelService.deleteChannelById(id)

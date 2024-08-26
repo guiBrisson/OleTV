@@ -1,0 +1,23 @@
+CREATE TABLE ChannelGenre (
+    `order` INTEGER NOT NULL PRIMARY KEY,
+    name TEXT NOT NULL
+);
+
+selectAllChannelGenre:
+SELECT * FROM ChannelGenre
+ORDER BY `order` DESC;
+
+insertChannelGenre:
+INSERT INTO ChannelGenre (
+    `order`,
+    name
+) VALUES (?, ?);
+
+updateChannelGenre:
+UPDATE ChannelGenre
+SET
+    name = ?
+WHERE `order` = ?;
+
+deleteChannelGenreByOrder:
+DELETE FROM ChannelGenre WHERE `order` = ?;
